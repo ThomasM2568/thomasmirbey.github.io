@@ -1,9 +1,50 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Example</title>
-    </head>
-    <body>
-        <p>This is an example of a simple HTML page with one paragraph.</p>
-    </body>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon Portfolio</title>
+</head>
+<body>
+  <header>
+    <button id="btnSwitch">Français</button>
+  </header>
+
+  <main>
+    <h1 id="title">Accueil</h1>
+    <p id="presentation">Bonjour ! Je suis un développeur web passionné.</p>
+  </main>
+
+  <script>
+    const btnSwitch = document.getElementById('btnSwitch');
+    const title = document.getElementById('title');
+    const presentation = document.getElementById('presentation');
+
+    let language = 'fr'; // Langue par défaut : français
+
+    // Fonction pour basculer entre les langues
+    function toggleLanguage() {
+      language = (language === 'fr') ? 'en' : 'fr';
+      btnSwitch.textContent = (language === 'fr') ? 'Français' : 'English';
+      updateContent();
+    }
+
+    // Fonction pour mettre à jour le contenu en fonction de la langue
+    function updateContent() {
+      fetch(`${language}.yaml`)
+        .then(response => response.text())
+        .then(data => {
+          const translations = jsyaml.load(data);
+          title.textContent = translations['accueil'];
+          presentation.textContent = translations['presentation'];
+        })
+        .catch(error => console.error(error));
+    }
+
+    btnSwitch.addEventListener('click', toggleLanguage);
+
+    // Au chargement de la page, met à jour le contenu selon la langue choisie
+    updateContent();
+  </script>
+</body>
 </html>

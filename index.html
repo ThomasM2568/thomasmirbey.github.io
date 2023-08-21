@@ -1,50 +1,132 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mon Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio &#124 Thomas Mirbey</title>
+<link rel="icon" href="img/icon.png">
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #1c1c1c; 
+    font-family: Arial, sans-serif;
+    color: #e0e0e0; 
+    overflow: hidden;
+  }
+
+  .container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .content {
+    text-align: center;
+    padding: 20px;
+  }
+
+  h1 {
+    margin-bottom: 0;
+    font-size: 32px;
+  }
+
+  p {
+    line-height: 1.6;
+    margin-top: 0;
+  }
+
+  .code-text {
+    position: absolute;
+    font-family: monospace;
+    font-size: 20px;
+    color: #323232;
+    line-height: 1.4;
+    white-space: pre;
+    user-select: none;
+  }
+
+ .nav-button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    background: linear-gradient(to right, #bfbb5a, #9f9472); 
+    color: #e0e0e0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+  }
+
+  .nav-button:hover {
+    background-color: #9f9472; 
+    transform: scale(1.05);
+  }
+.separator {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, #bfbb5a, #9f9472); 
+  margin-top: 20px;
+}
+</style>
 </head>
 <body>
-  <header>
-    <button id="btnSwitch">Français</button>
-  </header>
+  <div class="container">
+    <div class="content">
+      <h1 style="color: #ffffff;">Portfolio de présentation</h1>
+      <p style="color: #ffffff;">Thomas Mirbey</p>
+      <button onclick="window.location.href='portfolio.html'" class="nav-button">Voir le portfolio</button>
 
-  <main>
-    <h1 id="title">Accueil</h1>
-    <p id="presentation">Bonjour ! Je suis un développeur web passionné.</p>
-  </main>
+    </div>
 
-  <script>
-    const btnSwitch = document.getElementById('btnSwitch');
-    const title = document.getElementById('title');
-    const presentation = document.getElementById('presentation');
+    <div class="code-text" style="top: 10%; left: 5%;">
+      #!/bin/python
+      import requests
+      from cisco_api import CiscoAPI
+      api = CiscoAPI()
+      equipements = api.get_equipements()
+      for equipement in equipements:
+          print(f"Équipement: {equipement['nom']}")
+          print(f"Adresse IP: {equipement['adresse_ip']}")
+          print(f"Modèle: {equipement['modele']}")
+          print("-" * 20)
+    </div>
+    <div class="code-text" style="top: 30%; left: 70%;">
+      #!/bin/c++
+      #include <iostream>
+      using namespace std;
+      int main() {
+          cout << "Équipement: Routeur A" << endl;
+          cout << "Adresse IP: 192.168.1.1" << endl;
+          cout << "Modèle: Cisco 2900" << endl;
+          cout << "-------------------" << endl;
+          return 0;
+      }
+    </div>
+    <div class="code-text" style="top: 50%; left: 20%;">
+      #!/bin/go
+      package main
+      import (
+          "fmt"
+      )
+      func main() {
+          fmt.Println("Équipement: Commutateur B")
+          fmt.Println("Adresse IP: 10.0.0.1")
+          fmt.Println("Modèle: Cisco 3650")
+          fmt.Println("-------------------")
+      }
+    </div>
+    <div class="code-text" style="top: 70%; left: 80%;">
+      #!/bin/bash
+      echo "Équipement: Pare-feu C"
+      echo "Adresse IP: 172.16.0.1"
+      echo "Modèle: Cisco ASA"
+      echo "-------------------"
+    </div>
+  </div>
 
-    let language = 'fr'; // Langue par défaut : français
-
-    // Fonction pour basculer entre les langues
-    function toggleLanguage() {
-      language = (language === 'fr') ? 'en' : 'fr';
-      btnSwitch.textContent = (language === 'fr') ? 'Français' : 'English';
-      updateContent();
-    }
-
-    // Fonction pour mettre à jour le contenu en fonction de la langue
-    function updateContent() {
-      fetch(`${language}.yaml`)
-        .then(response => response.text())
-        .then(data => {
-          const translations = jsyaml.load(data);
-          title.textContent = translations['accueil'];
-          presentation.textContent = translations['presentation'];
-        })
-        .catch(error => console.error(error));
-    }
-
-    btnSwitch.addEventListener('click', toggleLanguage);
-
-    // Au chargement de la page, met à jour le contenu selon la langue choisie
-    updateContent();
-  </script>
 </body>
 </html>
